@@ -27,7 +27,10 @@ async function autoScroll(page) {
 }
 
 router.get('/fetch', async (req, res, next) => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
   await page.setViewport({ height: 768, width: 1024 });
   await page.goto('https://www.indiehackers.com/milestones/');
@@ -40,7 +43,12 @@ router.get('/fetch', async (req, res, next) => {
   //.replace(new RegExp('\\n', 'g'), '')
   var element = await page.$$eval('.milestone-entry__link', (anchors) => {
     return anchors.map((anchor) => {
-      return { id: anchor.id, title: anchor.textContent, url: anchor.href, date: new Date() };
+      return {
+        id: anchor.id,
+        title: anchor.textContent,
+        url: anchor.href,
+        date: new Date(),
+      };
     });
   });
 
