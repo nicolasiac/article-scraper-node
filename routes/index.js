@@ -1,6 +1,9 @@
 var express = require('express');
+var cors = require('cors');
 var router = express.Router();
 const puppeteer = require('puppeteer');
+
+router.use(cors());
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
