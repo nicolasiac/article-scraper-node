@@ -66,6 +66,7 @@ router.get('/fetch', async (req, res, next) => {
     '1st customer',
     'first client',
     '1st client',
+    'user',
   ];
   // element.forEach((item) => console.log(item.title.trim()))
   element = element.filter((anchor) => {
